@@ -2,9 +2,23 @@ import { React, useState } from 'react';
 import './index.css';
 
 function TableDays() {
+  const arrMonth = [
+    'Январь',
+    'Февраль',
+    'Март',
+    'Апрель',
+    'Май',
+    'Июнь',
+    'Июль',
+    'Август',
+    'Сентябрь',
+    'Октябрь',
+    'Ноябрь',
+    'Декабрь',
+  ];
   let date = new Date();
-  let year = date.getFullYear();
-  let month = date.getMonth();
+  let [year, setYear] = useState(date.getFullYear());
+  let [month, setMonth] = useState(date.getMonth());
 
   //Принимает число и создает от 1 до этого числа
   function range(count) {
@@ -108,6 +122,7 @@ function TableDays() {
 
     let result = createTable(nums);
     console.log(year, month);
+
     return result;
   }
   //=============
@@ -119,15 +134,14 @@ function TableDays() {
   //     return 0;
   //   }
   // }
-  let test = draw(year, month);
-  console.log(test);
-  //В стейт попадает результат функции, а в онклик мы меняем аргументы для функции
-  let [aaa, setAaa] = useState(test);
-  console.log(aaa);
 
+  //В стейт попадает результат функции, а в онклик мы меняем аргументы для функции
+  let [aaa, setAaa] = useState(draw(year, month));
+  console.log(aaa);
+  //================Следующий месяц и год==========================
   function getNextYear(year, month) {
     if (month == 11) {
-      ++year;
+      setYear(++year);
 
       return year;
     } else {
@@ -136,26 +150,54 @@ function TableDays() {
   }
   function getNextMonth(month) {
     if (month == 11) {
-      month = 0;
+      setMonth((month = 0));
+
       return month;
     } else {
-      return ++month;
+      setMonth(++month);
+      return month;
     }
   }
-  //=======стейты месяц и год для смены======и отображения
+  //==========================Предыдущий месяц и год=====================
+  function prevNextYear(year, month) {
+    if (month == 0) {
+      setYear(--year);
 
-  //именно они должны увеличиваться
+      return year;
+    } else {
+      return year;
+    }
+  }
+  function prevNextMonth(month) {
+    if (month == 0) {
+      setMonth((month = 11));
+
+      return month;
+    } else {
+      setMonth(--month);
+      return month;
+    }
+  }
+  console.log(arrMonth[month]);
+
   return (
     <>
       <div className="header">
-        <button className="header__btn-nav">&#9668;</button>
-        <h2>1</h2>
         <button
           className="header__btn-nav"
           onClick={() => {
-            setAaa(
-              (test = draw(getNextYear(year, month), getNextMonth(month)))
-            );
+            setAaa(draw(prevNextYear(year, month), prevNextMonth(month)));
+          }}
+        >
+          &#9668;
+        </button>
+        <h2>
+          {arrMonth[month]} {year}
+        </h2>
+        <button
+          className="header__btn-nav"
+          onClick={() => {
+            setAaa(draw(getNextYear(year, month), getNextMonth(month)));
           }}
         >
           &#9658;
