@@ -1,5 +1,7 @@
 import { React, useState } from 'react';
 import './index.css';
+import Note from './Note';
+import setNote from './Note';
 
 function TableDays() {
   const arrMonth = [
@@ -96,7 +98,9 @@ function TableDays() {
         <tr key={index}>
           {item.map((elem, index2) =>
             date.getDate() != elem ? (
-              <td key={index2}>{elem}</td>
+              <td key={index2} onClick={() => setNote()}>
+                {elem}
+              </td>
             ) : (
               <td className="monDay" key={index2}>
                 {elem}
@@ -180,6 +184,11 @@ function TableDays() {
   }
   console.log(arrMonth[month]);
 
+  //======================SetNote==============
+  function setNote() {
+    localStorage.setItem('key', 'value');
+    console.log('1');
+  }
   return (
     <>
       <div className="header">
@@ -220,6 +229,7 @@ function TableDays() {
         </table>
         <div className="nav"></div>
       </div>
+      <Note />
     </>
   );
 }

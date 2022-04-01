@@ -61,3 +61,11 @@ body {
   font-size: 12px;
   line-height: 17px;
 }
+
+#note {
+  width: 350px;
+  height: 150px;
+  background-color: black;
+  border-radius: 20px;
+  display: none;
+}
