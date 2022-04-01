@@ -111,52 +111,74 @@ function TableDays() {
     return result;
   }
   //=============
-  function getNextYear(year, month) {
-    if (month == 11) {
-      return year + 1;
-    } else return year;
-  }
 
-  function getNextMonth(month) {
-    if (month != 11) {
-      return month + 1;
-    } else {
-      return 0;
-    }
-  }
+  // function getNextMonth(month) {
+  //   if (month != 11) {
+  //     return month + 1;
+  //   } else {
+  //     return 0;
+  //   }
+  // }
   let test = draw(year, month);
+  console.log(test);
   //В стейт попадает результат функции, а в онклик мы меняем аргументы для функции
   let [aaa, setAaa] = useState(test);
   console.log(aaa);
+
+  function getNextYear(year, month) {
+    if (month == 11) {
+      ++year;
+
+      return year;
+    } else {
+      return year;
+    }
+  }
+  function getNextMonth(month) {
+    if (month == 11) {
+      month = 0;
+      return month;
+    } else {
+      return ++month;
+    }
+  }
+  //=======стейты месяц и год для смены======и отображения
+
+  //именно они должны увеличиваться
   return (
-    <div id="calendar">
-      <div className="info">Янв 2020</div>
-      <table>
-        <thead>
-          <tr>
-            <th>пн</th>
-            <th>вт</th>
-            <th>ср</th>
-            <th>чт</th>
-            <th>пт</th>
-            <th>сб</th>
-            <th>вс</th>
-          </tr>
-        </thead>
-        <tbody className="body">{aaa}</tbody>
-      </table>
-      <div className="nav">
-        <button className="prev">←</button>
+    <>
+      <div className="header">
+        <button className="header__btn-nav">&#9668;</button>
+        <h2>1</h2>
         <button
-          className="next"
-          onClick={() =>
-            setAaa((test = draw(getNextYear(year, month), getNextMonth(month))))
-          }
+          className="header__btn-nav"
+          onClick={() => {
+            setAaa(
+              (test = draw(getNextYear(year, month), getNextMonth(month)))
+            );
+          }}
         >
-          →
+          &#9658;
         </button>
       </div>
-    </div>
+      <div id="calendar">
+        <table>
+          <thead>
+            <tr>
+              <th>пн</th>
+              <th>вт</th>
+              <th>ср</th>
+              <th>чт</th>
+              <th>пт</th>
+              <th>сб</th>
+              <th>вс</th>
+            </tr>
+          </thead>
+          <tbody className="body">{aaa}</tbody>
+        </table>
+        <div className="nav"></div>
+      </div>
+    </>
   );
 }
 

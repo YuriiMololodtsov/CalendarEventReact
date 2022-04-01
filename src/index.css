@@ -1,29 +1,63 @@
 #parent {
   text-align: center;
+  color: whitesmoke;
+  background-color: whitesmoke;
+  max-width: 350px;
+  border-radius: 5%;
 }
+
 #calendar {
   display: inline-block;
+  background-color: black;
+  border-radius: 20px;
+  min-width: 350px;
+  text-align: center;
 }
+
 #calendar td,
 #calendar th {
-  padding: 10px;
-  border: 1px solid black;
+  padding: 10px 12px;
   text-align: center;
 }
 
-#calendar .nav,
-#calendar .info {
+.monDay {
+  background-color: red;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 20px;
+}
+body {
+  background-color: gainsboro;
+  font-family: Arial, serif;
+}
+.header {
+  width: 350px;
+  height: 60px;
+  background-color: black;
+  border-radius: 15px;
+  margin-bottom: 5px;
+  color: aliceblue;
   text-align: center;
-}
-#calendar a {
-  color: blue;
-  font-size: 25px;
-  text-decoration: none;
-}
-#calendar a:hover {
-  color: red;
+  padding: 3px 0px;
+  display: flex;
+  justify-content: space-around;
 }
 
-#calendar .active {
-  color: red;
+.header__btn-nav {
+  border: 0;
+  background-color: black;
+  color: aliceblue;
+}
+
+.note {
+  width: 350px;
+  min-height: 120px;
+  background-color: black;
+  border-radius: 15px;
+  margin-top: 5px;
+  text-align: center;
+  color: aliceblue;
+  padding: 12px 0px;
+  font-size: 12px;
+  line-height: 17px;
 }
