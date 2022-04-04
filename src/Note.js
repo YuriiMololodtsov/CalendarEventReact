@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.css';
 
 function Note() {
   function setNote() {
@@ -6,7 +7,10 @@ function Note() {
   }
   return (
     <div id="note">
-      <ol></ol>
+      <ol>
+        <ul>1</ul>
+      </ol>
+      {setNote()}
     </div>
   );
 }

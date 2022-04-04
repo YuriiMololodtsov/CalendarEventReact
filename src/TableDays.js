@@ -1,7 +1,7 @@
 import { React, useState } from 'react';
 import './index.css';
 import Note from './Note';
-import setNote from './Note';
+import Test from './Test';
 
 function TableDays() {
   const arrMonth = [
@@ -21,6 +21,7 @@ function TableDays() {
   let date = new Date();
   let [year, setYear] = useState(date.getFullYear());
   let [month, setMonth] = useState(date.getMonth());
+  let [events, setEvents] = useState([]);
 
   //Принимает число и создает от 1 до этого числа
   function range(count) {
@@ -98,9 +99,7 @@ function TableDays() {
         <tr key={index}>
           {item.map((elem, index2) =>
             date.getDate() != elem ? (
-              <td key={index2} onClick={() => setNote()}>
-                {elem}
-              </td>
+              <td key={index2}>{elem}</td>
             ) : (
               <td className="monDay" key={index2}>
                 {elem}
@@ -185,10 +184,20 @@ function TableDays() {
   console.log(arrMonth[month]);
 
   //======================SetNote==============
-  function setNote() {
-    localStorage.setItem('key', 'value');
-    console.log('1');
+  let eventInDay1;
+  let [eventInDay, setEventInDay] = useState(eventInDay1);
+  function newNote(event) {
+    console.log(event.target);
+    setEvents();
+    return setEventInDay(
+      (eventInDay = (
+        <div>
+          <Test />
+        </div>
+      ))
+    );
   }
+  console.log(eventInDay);
   return (
     <>
       <div className="header">
@@ -229,7 +238,7 @@ function TableDays() {
         </table>
         <div className="nav"></div>
       </div>
-      <Note />
+      {eventInDay}
     </>
   );
 }
