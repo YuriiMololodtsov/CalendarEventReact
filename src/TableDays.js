@@ -1,7 +1,6 @@
 import { React, useState } from 'react';
 import './index.css';
 import Note from './Note';
-import Test from './Test';
 
 function TableDays() {
   const arrMonth = [
@@ -21,7 +20,7 @@ function TableDays() {
   let date = new Date();
   let [year, setYear] = useState(date.getFullYear());
   let [month, setMonth] = useState(date.getMonth());
-  let [day, setDay] = useState(date.getDate());
+  let [dayClick, setDayClick] = useState();
   let [events, setEvents] = useState([]);
 
   //Принимает число и создает от 1 до этого числа
@@ -100,7 +99,12 @@ function TableDays() {
         <tr key={index}>
           {item.map((elem, index2) =>
             date.getDate() != elem ? (
-              <td key={index2}>{elem}</td>
+              <td
+                onClick={(e) => setDayClick((dayClick = e.target.innerText))}
+                key={index2}
+              >
+                {elem}
+              </td>
             ) : (
               <td className="monDay" key={index2}>
                 {elem}
@@ -222,8 +226,8 @@ function TableDays() {
           </thead>
           <tbody className="body">{aaa}</tbody>
         </table>
-        <div className="nav"></div>
       </div>
+      <Note year={year} month={arrMonth[month]} day={dayClick} />
     </>
   );
 }

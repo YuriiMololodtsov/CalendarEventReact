@@ -51,7 +51,7 @@ body {
   color: aliceblue;
 }
 
-/* #note {
+.note {
   width: 350px;
   min-height: 120px;
   background-color: black;
@@ -62,7 +62,7 @@ body {
   padding: 12px 0px;
   font-size: 12px;
   line-height: 17px;
-} */
+}
 
 .test {
   width: 350px;
