@@ -21,6 +21,7 @@ function TableDays() {
   let date = new Date();
   let [year, setYear] = useState(date.getFullYear());
   let [month, setMonth] = useState(date.getMonth());
+  let [day, setDay] = useState(date.getDate());
   let [events, setEvents] = useState([]);
 
   //Принимает число и создает от 1 до этого числа
@@ -183,21 +184,6 @@ function TableDays() {
   }
   console.log(arrMonth[month]);
 
-  //======================SetNote==============
-  let eventInDay1;
-  let [eventInDay, setEventInDay] = useState(eventInDay1);
-  function newNote(event) {
-    console.log(event.target);
-    setEvents();
-    return setEventInDay(
-      (eventInDay = (
-        <div>
-          <Test />
-        </div>
-      ))
-    );
-  }
-  console.log(eventInDay);
   return (
     <>
       <div className="header">
@@ -238,7 +224,6 @@ function TableDays() {
         </table>
         <div className="nav"></div>
       </div>
-      {eventInDay}
     </>
   );
 }
