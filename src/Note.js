@@ -4,22 +4,22 @@ import './index.css';
 function Note(props) {
   const name = `${props.day} ${props.month} ${props.year}`;
 
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState();
   const [text, setText] = useState('');
 
   const [storage, setStorage] = useState({
     name: [],
   });
-  let res;
+  console.log(text);
   function handleClick() {
     setText(value);
 
     setStorage((storage) => ({
       ...storage,
-      name: [...storage.name, text],
+      name: [...storage.name, value],
     }));
 
-    localStorage.setItem(name, text);
+    localStorage.setItem(name, value);
   }
   console.log(storage);
 
@@ -31,7 +31,7 @@ function Note(props) {
       <input value={value} onChange={(e) => setValue(e.target.value)} />
       <button onClick={handleClick}>Записать</button>
       <ol>
-        <li>{res}</li>
+        <li>{text}</li>
       </ol>
     </div>
   );
