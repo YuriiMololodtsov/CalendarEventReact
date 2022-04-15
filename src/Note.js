@@ -11,6 +11,7 @@ function Note(props) {
     name: [],
   });
   console.log(text);
+
   function handleClick() {
     setText(value);
 
@@ -18,10 +19,24 @@ function Note(props) {
       ...storage,
       name: [...storage.name, value],
     }));
-
-    localStorage.setItem(name, value);
   }
   console.log(storage);
+  let json = JSON.stringify(storage);
+  console.log(json);
+  localStorage.setItem(name, json);
+
+  //   localStorage.setItem(name, json);
+  // function sendingArrayToStorage(arr, name) {
+  //   let json = JSON.stringify(arr);
+
+  //   localStorage.setItem(name, json);
+
+  //   console.log(json);
+  //   console.log(name);
+  //   console.log(localStorage.getItem(name));
+  // }
+
+  // sendingArrayToStorage(storage, name);
 
   return (
     <div className="note">
@@ -30,9 +45,7 @@ function Note(props) {
       </h3>
       <input value={value} onChange={(e) => setValue(e.target.value)} />
       <button onClick={handleClick}>Записать</button>
-      <ol>
-        <li>{text}</li>
-      </ol>
+      <ol>{}</ol>
     </div>
   );
 }
