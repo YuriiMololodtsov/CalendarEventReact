@@ -129,7 +129,6 @@ function TableDays() {
     let nums = chunk(normalize(arr, firstWeekDay, 6 - lastWeekDay), 7);
 
     let result = createTable(nums);
-    console.log(year, month);
 
     return result;
   }

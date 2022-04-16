@@ -30,20 +30,25 @@ function Note(props) {
       localStorage.setItem(name, json);
     }
   }
+
   //создаем список событий из массива, крепим кнопку удаления
-  let res = JSON.parse(localStorage.getItem(name));
-  let viwe = res.map((item, index) => {
-    return (
-      <li key={index}>
-        {item}
-        <span>
-          <button className="button-del" data-title="Софийский собор">
-            &#128465;
-          </button>
-        </span>
-      </li>
-    );
-  });
+  let viwe;
+  let res;
+  console.log(viwe);
+  if (localStorage.getItem(name)) {
+    res = JSON.parse(localStorage.getItem(name));
+    viwe = res.map((item, index) => {
+      return (
+        <li key={index}>
+          {item}
+          <span>
+            <button className="button-del">&#128465;</button>
+          </span>
+        </li>
+      );
+    });
+  }
+  console.log(res);
   console.log(storage);
   return (
     <div className="note">
