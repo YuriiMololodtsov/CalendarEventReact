@@ -21,6 +21,10 @@
   padding: 10px 12px;
 }
 
+td:hover {
+  color: tomato;
+  cursor: pointer;
+}
 .monDay {
   background-color: red;
   border-radius: 20px;
@@ -73,14 +77,40 @@ body {
   margin-top: 5px;
 }
 
-.input {
-  width: 300px;
-
+input {
+  width: 200px;
+  color: whitesmoke;
   background-color: rgb(32, 32, 32);
   border-radius: 4px;
+  box-shadow: none;
+  border: none;
 }
 
 ol li {
-  border-bottom: solid white 1px;
+  /* border-bottom: solid white 1px; */
   max-width: 290px;
+}
+ol li:hover {
+  /* color: tomato; */
+  cursor: pointer;
+}
+
+button {
+  background-color: rgb(223, 62, 62);
+  border-radius: 0px 5px 5px 0px;
+  color: aliceblue;
+  border: none;
+}
+
+.button-del {
+  width: 10px;
+  height: 10px;
+  background-color: transparent;
+  border: none;
+  color: rgb(216, 215, 215);
+}
+
+.button-del:hover {
+  color: tomato;
+  cursor: pointer;
 }

@@ -37,7 +37,9 @@ function Note(props) {
       <li key={index}>
         {item}
         <span>
-          <button>del</button>
+          <button className="button-del" data-title="Софийский собор">
+            &#128465;
+          </button>
         </span>
       </li>
     );
@@ -50,7 +52,7 @@ function Note(props) {
       </h3>
       <input value={value} onChange={(e) => setValue(e.target.value)} />
       <button onClick={handleClick}>Записать</button>
-      <p>{JSON.parse(localStorage.getItem(name))}</p>
+      {/* <p>{JSON.parse(localStorage.getItem(name))}</p> */}
       <ol>{viwe}</ol>
     </div>
   );
