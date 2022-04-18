@@ -1,64 +1,90 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './index.css';
+import { RiDeleteBinFill } from 'react-icons/ri';
 
 function Note(props) {
-  let name = `${props.day}${props.month}${props.year}`;
+  const name = `${props.day} ${props.month} ${props.year}`;
 
+  const setDataFromStorage = useCallback(
+    () =>
+      localStorage.getItem('data')
+        ? JSON.parse(localStorage.getItem('data'))[name] || []
+        : [],
+    [name]
+  );
+
+  const [data, setData] = useState(setDataFromStorage());
   const [value, setValue] = useState();
-  const [text, setText] = useState('');
-  const [storage, setStorage] = useState({});
-  let copy;
+  const [editData, setEditData] = useState(null);
 
-  console.log(text);
+  useEffect(() => {
+    setData(setDataFromStorage());
+  }, [name]);
 
   function handleClick() {
-    setText(value);
-    console.log(name);
-    if (name in storage) {
-      copy = Object.assign({}, storage);
-      copy[name] = [...copy[name], value];
-      setStorage(copy);
-      let json = JSON.stringify(copy[name]);
-      localStorage.setItem(name, json);
-      //добавить в массив storage[name], элемент
-      //сразу парсим сюда
-    } else {
-      copy = Object.assign({}, storage);
-      copy[name] = [value];
-      setStorage(copy);
-      let json = JSON.stringify(copy[name]);
-      localStorage.setItem(name, json);
+    const rawData = localStorage.getItem('data') || '{}';
+
+    if (editData) {
+      const newData = data.map((item) =>
+        item.id === editData.id ? { ...item, text: value } : item
+      );
+      localStorage.setItem(
+        'data',
+        JSON.stringify({ ...JSON.parse(rawData), [name]: newData })
+      );
+      setValue('');
+      setData(newData);
+      setEditData(null);
+    } else if (value) {
+      const newData = [{ id: new Date().getTime(), text: value }, ...data];
+      localStorage.setItem(
+        'data',
+        JSON.stringify({ ...JSON.parse(rawData), [name]: newData })
+      );
+      setValue('');
+      setData(newData);
     }
   }
 
-  //создаем список событий из массива, крепим кнопку удаления
-  let viwe;
-  let res;
-  console.log(viwe);
-  if (localStorage.getItem(name)) {
-    res = JSON.parse(localStorage.getItem(name));
-    viwe = res.map((item, index) => {
-      return (
-        <li key={index}>
-          {item}
-          <span>
-            <button className="button-del">&#128465;</button>
-          </span>
-        </li>
-      );
-    });
+  function handleDelete(e, id) {
+    e.stopPropagation();
+    const newData = data.filter((item) => item.id !== id);
+    const rawData = localStorage.getItem('data') || '{}';
+    localStorage.setItem(
+      'data',
+      JSON.stringify({ ...JSON.parse(rawData), [name]: newData })
+    );
+    setData(newData);
   }
-  console.log(res);
-  console.log(storage);
+
+  function handleEdit(id) {
+    const currentData = data.find((item) => item.id === id);
+    setEditData(currentData);
+    setValue(currentData.text);
+  }
+
   return (
     <div className="note">
       <h3 className="note__title">
         {props.day} {props.month} {props.year}
       </h3>
       <input value={value} onChange={(e) => setValue(e.target.value)} />
-      <button onClick={handleClick}>Записать</button>
-      {/* <p>{JSON.parse(localStorage.getItem(name))}</p> */}
-      <ol>{viwe}</ol>
+      <button onClick={handleClick}>
+        {editData ? 'Обновить' : 'Записать'}
+      </button>
+      <ol>
+        {data.map((item) => (
+          <li key={item.id} onClick={() => handleEdit(item.id)}>
+            {item.text}{' '}
+            <span
+              className="button-del"
+              onClick={(e) => handleDelete(e, item.id)}
+            >
+              <RiDeleteBinFill />
+            </span>
+          </li>
+        ))}
+      </ol>
     </div>
   );
 }
